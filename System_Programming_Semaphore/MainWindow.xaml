@@ -1,0 +1,77 @@
+﻿<Window x:Class="System_Programming_Semaphore.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:System_Programming_Semaphore"
+xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Title="MainWindow" ResizeMode="CanMinimize" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+   
+        <StackPanel Grid.Column="0">
+            <TextBlock Text="Working Threads" Margin="22 15 0 -10 "/>
+            <ListView ItemsSource="{Binding WorkingThreads}" Height="260" Margin="20" VerticalAlignment="Top" MouseDoubleClick="WorkingList_Click" >
+                <ListView.View>
+                    <GridView>
+
+                        <GridViewColumn Width="90" DisplayMemberBinding="{Binding Name}"/>
+                        <GridViewColumn Width="auto">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <materialDesign:PackIcon Kind="ArrowRight"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Width="90" DisplayMemberBinding="{Binding ManagedThreadId}"/>
+
+                    </GridView>
+                </ListView.View>
+            </ListView>
+            <TextBlock Text="Places in Semaphore" Margin="20" Height="25" FontSize="18"/>
+
+            <StackPanel Margin="-45 -15 0 0" Width="180" Orientation="Horizontal">
+            <TextBox x:Name="CountText" Height="25" FontSize="18" Width="150"  Foreground="#060405" Padding="5 0 5 0" IsReadOnly="True" Text="{Binding SemaphoreCount}"/>
+                <StackPanel>
+                    <Button x:Name="UpArrow" Width="15" Height="13" Click="UpArrow_Click">
+                        <materialDesign:PackIcon Kind="ArrowUp" Height="10" Margin="-5"/>
+                    </Button>
+                    <Button x:Name="DownArrow" Width="15" Height="13" Click="DownArrow_Click">
+                        <materialDesign:PackIcon Kind="ArrowDown" Height="10" Margin="-5"/>
+                    </Button>
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+    
+        <StackPanel Grid.Column="1">
+            <TextBlock Text="Waiting Threads" Margin="22 15 0 -10 "/>
+            <ListView MouseDoubleClick="WaitingList_Click" ItemsSource="{Binding WaitingThreads}" Height="260" Margin="20" VerticalAlignment="Top">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Width="200" DisplayMemberBinding="{Binding Name}"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+
+        </StackPanel> 
+        
+        <StackPanel Grid.Column="2">
+            <TextBlock Text="Created Threads" Margin="22 15 0 -10 "/>
+            <ListView MouseDoubleClick="CreatedList_Click" ItemsSource="{Binding CreatedThreads}" Height="260" Margin="20" VerticalAlignment="Top">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Width="200" DisplayMemberBinding="{Binding Name}"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+
+            <Button HorizontalAlignment="Right" Content="Create New" Width="100" FontSize="18" VerticalAlignment="Bottom" Margin="20 40" x:Name="CreateBtn" Click="CreateBtn_Click"/>
+        </StackPanel>
+
+    </Grid>
+</Window>
